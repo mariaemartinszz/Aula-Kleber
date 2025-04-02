@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORTEADOR DA DUDA</title>
+    <style>
+        /* Resetando o estilo de margens e preenchimento padrão */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Castellar', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evita que o conteúdo saia da tela */
+            animation: mudarFundo 100s infinite alternate; /* Animação do fundo */
+        }
+
+
+        .container {
+            background-color: rgba(247, 162, 225, 0.9);
+            padding: 30px 50px;
+            border-radius: 10px; /*Arredonda a caixa do meio*/
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: subirDescer 2s ease-in-out infinite; /* Aplicando a animação */
+        }
+
+        h1 {
+            color: #110808;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 2px solid #f25cd9;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ff80d5;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            background-color: #ed5cf2;
+            color: rgb(245, 231, 242);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #a0046f;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-size: 2em;
+            color: #000000;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1>Sorteio</h1>
+        <h2 id="numeroSorteado" class="mt-3"></h2>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4">
+                <input type="number" id="min" class="form-control" placeholder="Quantidade de números">
+            </div>
+            <div class="col-md-4">
+                <input type="number" id="max" class="form-control" placeholder="Número máximo">
+            </div>
+        </div>
+        
+        <button class="btn btn-success btn-lg mt-3" onclick="sorteio()">Sortear</button>
+    </div>
+
+    <script>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * (max + 1));
+        }       
+
+        function sorteio() {
+            let valorQnt = Number(document.getElementById('min').value);
+            let valorMaior = Number(document.getElementById('max').value);
+            let numSorteado = [];
+
+            if (valorQnt <= 0 || valorMaior <= 0) {
+                document.getElementById('numeroSorteado').innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            for (let contador = 0; contador < valorQnt; contador++) {
+                let sorteado = getRandomInt(valorMaior);
+                numSorteado.push(sorteado);
+            }
+
+            document.getElementById('numeroSorteado').innerHTML = "Os números sorteados foram: " + numSorteado.join(", ") + ".";
+        }
+    </script>
+</body>
+</html>
